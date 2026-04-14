@@ -3,6 +3,7 @@
 ## Introduction
 
 In this lab assessment you will explore writing more advanced SQL queries aimed at analyzing data on a more granular level. You will be working with 3 different databases throughout the assessment.
+
 - planets.db: Contains data pertaining to planets in our solar system
 - dogs.db: Contains data pertaining to famous fictional dog characters
 - babe_ruth.db: Contains data pertaining to Babe Ruth's baseball career statistics
@@ -11,19 +12,19 @@ SQL (Structured Query Language) provides powerful tools for manipulating and ana
 
 ## Learning Objectives
 
-* Retrieve a subset of records from a table using a `WHERE` clause
-* Filter results using conditional operators
-* Apply an aggregate function to the result of a query
-* Order the results of your queries by using `ORDER BY` (`ASC` & `DESC`)
-* Limit the number of records returned by a query using `LIMIT`
-* Use `GROUP BY` statements in SQL to apply aggregate functions
+- Retrieve a subset of records from a table using a `WHERE` clause
+- Filter results using conditional operators
+- Apply an aggregate function to the result of a query
+- Order the results of your queries by using `ORDER BY` (`ASC` & `DESC`)
+- Limit the number of records returned by a query using `LIMIT`
+- Use `GROUP BY` statements in SQL to apply aggregate functions
 
 ## Set Up
 
-* Fork and Clone the GitHub Repo
-* Install dependencies and enter the virtual environment:
-    * `pipenv install`
-    * `pipenv shell`
+- Fork and Clone the GitHub Repo
+- Install dependencies and enter the virtual environment:
+  - `pipenv install`
+  - `pipenv shell`
 
 All your code will be in `main.py`. You can add any print statements needed to check your code and run the file with `python3 main.py`. The lab will be graded using the test suite, which you can also use to check your work by running `pytest` or `pytest -x`.
 
@@ -207,9 +208,62 @@ df_at_bats = None
 ```
 
 #### Close the connections
+
 ```python
 # This code is already at the bottom of the file
 conn1.close()
 conn2.close()
 conn3.close()
 ```
+
+SQL Filtering, Ordering, Limiting, and Grouping Lab
+Overview
+
+This project uses SQL inside Python (sqlite3 + pandas) to query and analyze data from three databases:
+
+planets.db
+dogs.db
+babe_ruth.db
+
+The goal was to practice filtering, sorting, limiting, and aggregating data using SQL.
+
+What Was Implemented
+Part 1: Basic Filtering
+Selected planets with 0 moons
+Selected planets with 7-letter names using:
+LENGTH(name) = 7
+Used correct column name: num_of_moons
+Part 2: Advanced Filtering
+Filtered planets by:
+Mass ≤ 1.00
+At least one moon AND mass < 1.00
+Found planets with "blue" in color using:
+LIKE '%blue%'
+Part 3: Ordering and Limiting
+Sorted hungry dogs by age
+Filtered dogs between ages 2–7 and sorted alphabetically
+Retrieved 4 oldest dogs using:
+ORDER BY age DESC, name ASC
+Handled NULL values by converting NaN → None in pandas
+Part 4: Aggregation
+Total years played:
+COUNT(DISTINCT year)
+Total home runs:
+SUM(HR)
+Used correct column names (year, HR)
+Part 5: Grouping and Aggregation
+Years played per team:
+GROUP BY team
+Average at-bats per team (only > 200):
+HAVING AVG(at_bats) > 200
+Key Takeaways:
+Always check the database schema (column names matter)
+Use COUNT vs SUM correctly
+Add tie-breakers in ORDER BY for consistent results
+Handle NULL vs NaN when using pandas
+How to Run
+pipenv install
+pipenv run pytest -x
+Result
+
+All tests passed successfully ✅
